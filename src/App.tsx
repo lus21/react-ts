@@ -1,54 +1,14 @@
-import React, { useState } from 'react';
-import { Dispatch } from 'redux';
-import { connect } from 'react-redux';
+import React from 'react';
 import './App.css';
-import { IRootState } from './store';
-import { DemoActions } from './store/demo/types';
-import * as actions from './store/demo/actions';
-import * as asyncactions from './store/demo/async-actions';
+// import List from './components/List/List';
+import Circle from './components/Circle/Circle';
 
-const mapStateToProps = ({ demo }: IRootState) => {
-  const { list, loading } = demo;
-  return { list, loading };
-}
 
-const mapDispatcherToProps = (dispatch: Dispatch<DemoActions>) => {
-  return {
-    addItem: (item: string) => dispatch(actions.addItemToList(item)),
-    addItemAsync: (item: string) => asyncactions.addItemAsync(dispatch, item)
-  }
-}
-
-type ReduxType = ReturnType<typeof mapStateToProps> & ReturnType<typeof mapDispatcherToProps>;
-
-type IState = string;
-
-function App(props: ReduxType) {
-  const [inputValue, setInputValue] = useState<IState>('');
-  const { list, addItemAsync, loading } = props;
-
-  const handleInputChange = (event: React.FormEvent<HTMLInputElement>) => {
-    const value = event?.currentTarget?.value;
-    setInputValue(value);
-  }
-
-  const handleAddClick = () => {
-    addItemAsync(inputValue);
-    setInputValue('');
-  }
+function App() {
 
   return (
-    <div className="App">
-      <div style={{ margin: '20px' }}>
-        <input value={inputValue} onChange={handleInputChange} />
-        <button onClick={handleAddClick}>Add</button>
-        <ul>
-          {list.map(l => <li key={l}>{l}</li>)}
-        </ul>
-      </div>
-      {loading && <div>Loading...</div>}
-    </div>
+    <Circle />
   );
 }
 
-export default connect(mapStateToProps, mapDispatcherToProps)(App);
+export default App;

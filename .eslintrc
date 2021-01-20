@@ -47,7 +47,7 @@
     "max-len": [
       "warn",
       {
-        "code": 80,
+        "code": 120,
         "ignoreStrings": true,
         "ignoreTemplateLiterals": true,
         "ignoreComments": true
@@ -89,6 +89,7 @@
         "exports": "only-multiline",
         "functions": "never"
       }
-    ]
+    ],
+    "react/require-default-props": "off"
   }
 }
